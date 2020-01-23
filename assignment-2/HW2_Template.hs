@@ -85,8 +85,13 @@ mapTree f (Node x y z) = Node (f x) (mapTree f y) (mapTree f z)
 --   >>> valueAt [L,L,L] ex
 --   Nothing
 --
-valueAt = undefined
 
+valueAt :: Path -> Tree a -> Maybe a
+valueAt [] (Node x _ _) = Just x
+valueAt (L:xs) (Node _ End _) = Nothing
+valueAt (L:xs) (Node _ x _) = (valueAt xs x)
+valueAt (R:xs) (Node _ _ End) = Nothing
+valueAt (R:xs) (Node _ _ x) = (valueAt xs x)
 
 -- | Find a path to a node that contains the given value.
 --
