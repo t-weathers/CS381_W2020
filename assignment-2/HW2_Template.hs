@@ -113,4 +113,12 @@ valueAt (R:xs) (Node _ _ x) = (valueAt xs x)
 --   Nothing
 --
 pathTo :: Eq a => a -> Tree a -> Maybe Path
-pathTo = undefined
+pathTo _ End = Nothing
+pathTo x (Node v l r)
+    | x == v = Just []
+    | otherwise = case pathTo x l of
+                    Just p -> Just(L : p) 
+                    Nothing -> case pathTo x r of
+                                    Just p -> Just(R : p)
+                                    Nothing -> Nothing
+
