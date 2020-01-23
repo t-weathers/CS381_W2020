@@ -41,12 +41,14 @@ ex = Node 4 (Node 3 (leaf 2) End)
 --   >>> encodeList ":-D"
 --   Node ':' End (Node '-' End (Node 'D' End End))
 --
-encodeList = undefined
+encodeList :: [a] -> Tree a
+encodeList [] = End
+encodeList (x:xs) = Node x (End) (encodeList xs)
 
 
 -- | Map a function over a tree. Applies the given function to every label
 --   in the tree, preserving the tree's structure.
---   
+--
 --   >>> mapTree odd End
 --   End
 --
@@ -64,7 +66,7 @@ encodeList = undefined
 --
 mapTree :: (a -> b) -> Tree a -> Tree b
 mapTree _ End = End
-mapTree f (Node x y z) = Node (f x) (mapTree f y) (mapTree f z) 
+mapTree f (Node x y z) = Node (f x) (mapTree f y) (mapTree f z)
 
 
 -- | Get the value at the node specified by a path. Returns 'Nothing' if
