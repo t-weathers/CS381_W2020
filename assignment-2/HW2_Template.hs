@@ -62,7 +62,9 @@ encodeList = undefined
 --   >>> ex == (mapTree (subtract 27) . mapTree (+27)) ex
 --   True
 --
-mapTree = undefined
+mapTree :: (a -> b) -> Tree a -> Tree b
+mapTree _ End = End
+mapTree f (Node x y z) = Node (f x) (mapTree f y) (mapTree f z) 
 
 
 -- | Get the value at the node specified by a path. Returns 'Nothing' if
