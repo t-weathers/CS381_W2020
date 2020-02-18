@@ -64,14 +64,18 @@ cmd (Move x2 y2) (Down ,(x1, y1))= ((Down,(x2,y2)),Just ((x1,y1),(x2,y2)))
 --   >>> prog (steps 2 0 0) start
 --   ((Down,(2,2)),[((0,0),(0,1)),((0,1),(1,1)),((1,1),(1,2)),((1,2),(2,2))])
 prog :: Prog -> State -> (State, [Line])
-prog (s:ss) (ud, (x,y)) = 
+prog [] state = state, []
+prog (s:ss) (ud, (x, y)) = case cmd s (ud, (x, y)) of
+				state, Nothing = prog (ss) state
+				state, Just line = prog (ss) state ++ line 
+   
     
     -- if cmd s (ud,(x,y) is Just
             --add to [line]
             --update state
     --else
             --update state
-            prog (ss) (cmd s (ud,(x,y)))
+            --prog (ss) (cmd s (ud,(x,y)))
 
 
 
