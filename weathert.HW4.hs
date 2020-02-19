@@ -1,3 +1,11 @@
+-- | HW 4 template, copyright of Erik Walkingshaw, Oregon State Universtiy Computer Science Dept.
+-- | provided template to be edited
+
+-- Alekos Hovekamp - hovekama - 932538626
+-- Andrew Gates - gatesand - 932724473
+-- Thomas Weathers - weathert - 932984402
+
+
 module HW3 where
 
 import MiniMiniLogo
